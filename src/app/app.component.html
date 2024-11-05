@@ -1,2 +1,32 @@
-<span>maoida tictac TOE (freaky Betonung)</span>
-<router-outlet/>
+<div class="app-container">
+  <div class="grid">
+    @for (row of boardState(); track rowIndex; let rowIndex = $index) {
+      <div class="grid-row">
+        @for (cell of row; track colIndex; let colIndex = $index) {
+          <app-field (click)="makeMove(rowIndex, colIndex)"></app-field>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="game-status">
+    <p>
+      Player Turn:
+      @switch (currentPlayer()) {
+        @case (-1) { X }
+        @case (1) { O }
+      }
+    </p>
+
+    @if (gameOutcome() !== 0) {
+      <p>
+        @switch (gameOutcome()) {
+          @case (-1) { X Wins! }
+          @case (1) { O Wins! }
+          @case (404) { It's a Draw! }
+        }
+      </p>
+      <button mat-button (click)="resetBoard()" class="reset-button">Reset Game</button>
+    }
+  </div>
+</div>

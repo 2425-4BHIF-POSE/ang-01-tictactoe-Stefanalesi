@@ -1,0 +1,3 @@
+<button mat-button (click)="onCellClick()" [disabled]="value !== 0">
+  {{ value === -1 ? 'X' : value === 1 ? 'O' : '' }}
+</button>
